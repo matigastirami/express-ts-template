@@ -3,18 +3,18 @@ This is a base project with some configurations to start up a new ExpressJS API.
 
 ## What it includes
 * ESLint config
-* Docker and Docker compose config (Pending)
+* Docker and Docker compose config
 * Winston Logger
 * Env vars configuration
+* Postgres
 * Redis (Pending)
-* Postgres (Pending)
-* MongoDB - Mongoose (Pending)
-* RabbitMQ client (Pending)
 * Example controller
-* Example service (Pending)
-* Example route
+* Example service
+* Example entity (TypeORM)
 * Example unit test (Pending)
 * Example e2e test (Pending)
+* MongoDB - Mongoose (Pending)
+* RabbitMQ client (Pending)
 
 ## How to run locally
 ```bash
