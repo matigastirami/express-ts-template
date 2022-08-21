@@ -4,7 +4,7 @@ import initRoutes from './src/controller';
 import logger from './src/lib/logger';
 import env from './src/lib/env';
 import "reflect-metadata";
-import initDbConnection from './src/lib/data-source';
+import {initDbConnection} from './src/lib/data-source';
 
 dotenv.config();
 

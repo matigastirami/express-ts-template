@@ -10,7 +10,12 @@
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "lint": "eslint . --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "typeorm": "npx ts-node ./node_modules/typeorm/cli",
+    "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./src/lib/data-source.ts",
+    "typeorm:generate-migration": "npm run typeorm -- -d ./src/lib/data-source.ts migration:generate ./migrations/%npm_config_name%",
+    "typeorm:create-migration": "npm run typeorm -- migration:create ./migrations/%npm_config_name%",
+    "typeorm:revert-migration": "npm run typeorm -- -d ./src/lib/data-source.ts migration:revert"
   },
   "keywords": [],
   "author": "",

@@ -1,22 +1,24 @@
 import { DataSource } from "typeorm";
 import { User } from "../entity/user.entity";
 
-export const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: "test",
-    password: "test",
-    database: "test",
+    username: "postgres",
+    password: "changeme",
+    database: "postgres",
     synchronize: false,
     logging: true,
     entities: [User],
     subscribers: [],
-    migrations: [],
+    migrations: [
+        'migrations/*.ts'
+    ],
 })
 
-const initDbConnection = () => {
+export const initDbConnection = () => {
     return AppDataSource.initialize();
 };
 
-export default initDbConnection;
+export default AppDataSource;
