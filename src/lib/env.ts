@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { cleanEnv, str, port, host } from 'envalid';
+import { cleanEnv, str, port, host, num } from 'envalid';
 dotenv.config();
 class Env {
   private readonly env = cleanEnv(process.env, {
@@ -12,7 +12,9 @@ class Env {
     DB__NAME: str({}),
     REDIS_HOST: host({}),
     REDIS_PORT: port({}),
-    REDIS_PASSWORD: str({})
+    REDIS_PASSWORD: str({}),
+    REDIS_URI: host({}),
+    REDIS_DEFAULT_CACHE_TIME_IN_MILIS: num({ default: 5000 })
   });
 
   get NODE_ENV() {
@@ -38,6 +40,8 @@ class Env {
       host: this.env.REDIS_HOST,
       port: this.env.REDIS_PORT,
       password: this.env.REDIS_PASSWORD,
+      uri: this.env.REDIS_URI,
+      cacheTime: this.env.REDIS_DEFAULT_CACHE_TIME_IN_MILIS
     };
   }
 }
