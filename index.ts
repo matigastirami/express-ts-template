@@ -7,6 +7,8 @@ import { initDbConnection } from './src/lib/data-source';
 // import { initRedisClient } from './src/lib/redis-client';
 
 const app: Express = express();
+app.use(express.json());
+
 const port = Env.PORT;
 
 initRoutes(app);
