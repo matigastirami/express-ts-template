@@ -16,7 +16,7 @@ class Env {
   }
 
   get PORT() {
-    return this.env.NODE_ENV
+    return this.env.PORT
   }
 
   get DB() {
