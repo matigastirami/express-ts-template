@@ -1,5 +1,6 @@
+import dotenv from 'dotenv';
 import { cleanEnv, str, port, host } from 'envalid';
-
+dotenv.config();
 class Env {
   private readonly env = cleanEnv(process.env, {
     NODE_ENV: str({ choices: ['development', 'test', 'production', 'staging'], default: 'development' }),
@@ -9,6 +10,9 @@ class Env {
     DB__USERNAME: str({}),
     DB__PASSWORD: str({}),
     DB__NAME: str({}),
+    REDIS_HOST: host({}),
+    REDIS_PORT: port({}),
+    REDIS_PASSWORD: str({})
   });
 
   get NODE_ENV() {
@@ -27,6 +31,14 @@ class Env {
       password: this.env.DB__PASSWORD,
       database: this.env.DB__NAME,
     }
+  }
+
+  get REDIS() {
+    return {
+      host: this.env.REDIS_HOST,
+      port: this.env.REDIS_PORT,
+      password: this.env.REDIS_PASSWORD,
+    };
   }
 }
 

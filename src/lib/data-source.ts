@@ -14,10 +14,6 @@ const AppDataSource = new DataSource({
     synchronize: false,
     logging: true,
     entities: [User],
-    subscribers: [],
-    migrations: [
-        'migrations/*.ts'
-    ],
 })
 
 export const initDbConnection = () => {
