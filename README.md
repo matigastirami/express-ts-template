@@ -7,7 +7,7 @@ This is a base project with some configurations to start up a new ExpressJS API.
 * Winston Logger
 * Env vars configuration
 * Postgres
-* Redis (Pending)
+* Redis
 * Example controller
 * Example service
 * Example entity (TypeORM)
