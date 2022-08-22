@@ -1,6 +1,6 @@
-import { Express, Request, Response } from 'express';
+import { Express, NextFunction, Request, Response } from 'express';
 import logger from '../lib/logger';
-// import { getCachedValue, setCachedValue } from '../middleware/cache.middleware';
+import { getCachedValue, setCachedValue } from '../middleware/cache.middleware';
 import UserService from '../service/user.service';
 
 class UserController {
@@ -8,7 +8,9 @@ class UserController {
     constructor(app: Express) {
         app.get(
             '/users/:id', 
+            getCachedValue('db:user').bind(this),
             this.findById.bind(this),
+            setCachedValue('db:user').bind(this)
         );
 
         app.post(
@@ -17,7 +19,7 @@ class UserController {
         );
     }
 
-    async findById(req: Request, res: Response) {
+    async findById(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
         // TODO: add class-validator to check inputs
@@ -32,8 +34,12 @@ class UserController {
             return res.status(404).end();    
         }
 
-        logger.error(`User ${id} found`);
-        return res.status(200).send(user);
+        logger.info(`User ${id} found`);
+        res.locals['db:user'] = user;
+
+        res.status(200).send(user);
+
+        next();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

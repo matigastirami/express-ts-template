@@ -1,11 +1,13 @@
-/* import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import logger from '../lib/logger';
 import RedisClient from '../lib/redis-client';
 
 const getCachedValue = (key: string): ((req: Request, res: Response, next: NextFunction) => void) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     const cachedValue = await RedisClient.getCache(key);
     if (!cachedValue) {
-      next();
+      logger.info(`No cached value for ${key}`);
+      return next();
     }
 
     return res
@@ -19,7 +21,8 @@ const setCachedValue = (key: string): ((req: Request, res: Response, next: NextF
     const cachedValue = await RedisClient.getCache(key);
 
     if (!cachedValue) {
-      await RedisClient.setCache(key, res.locals.cacheableValue);
+      logger.info(`No cached value for ${key}. Inserting into Redis`);
+      await RedisClient.setCache(key, res.locals[key]);
     }
 
     return next();
@@ -27,4 +30,3 @@ const setCachedValue = (key: string): ((req: Request, res: Response, next: NextF
 };
 
 export { getCachedValue, setCachedValue };
- */
