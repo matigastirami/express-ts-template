@@ -24,17 +24,24 @@ class CacheClient {
       logger.error(`There was an error on Redis client: ${error.message}`)
     );
 
-    this.redisClient.on('connect', () => logger.info('Sucessfully Connected to redis'))
+    this.redisClient.on('connect', () => logger.info('Sucessfully Connected to redis'));
+
+    process.on('exit', async () => {
+      await this.closeConnection();
+    })
 
     return this.redisClient.connect();
   };
+
+  public closeConnection = async () => {
+    await this.redisClient.quit();
+  }
 
   public getCache = (key: string) => {
     return this.redisClient.get(key);
   };
 
   public setCache = (key: string, value: any) => {
-    console.log(value);
     return this.redisClient.set(
         key, 
         _.isObjectLike(value) ? JSON.stringify(value) : value,

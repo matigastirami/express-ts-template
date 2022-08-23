@@ -1,19 +1,8 @@
-import express, { Express } from 'express';
-import initRoutes from './src/controller';
-import logger from './src/lib/logger';
-import Env from './src/lib/env';
-import "reflect-metadata";
-import { initDbConnection } from './src/lib/data-source';
-// import { initRedisClient } from './src/lib/redis-client';
+import app from "./src/app";
+import env from "./src/lib/env";
+import logger from "./src/lib/logger";
 
-const app: Express = express();
-app.use(express.json());
-
-const port = Env.PORT;
-
-initRoutes(app);
-initDbConnection();
-// initRedisClient();
+const port = env.PORT;
 
 app.listen(port, () => {
     logger.info(`Server running on port ${port}`);

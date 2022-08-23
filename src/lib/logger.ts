@@ -7,7 +7,7 @@ const logger = winston.createLogger({
 });
 
 // TODO: add some logging service for prod
-if (process.env.NODE_ENV !== 'production') {
+if (!['production'].includes(process.env.NODE_ENV ?? 'development')) {
   logger.add(new winston.transports.Console({
     format: winston.format.combine(
         winston.format.colorize(),
