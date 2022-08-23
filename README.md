@@ -12,7 +12,7 @@ This is a base project with some configurations to start up a new ExpressJS API.
 * Example service
 * Example entity (TypeORM)
 * Example unit test (Pending)
-* Example e2e test (Pending)
+* Example e2e test
 * MongoDB - Mongoose (Pending)
 * RabbitMQ client (Pending)
 
