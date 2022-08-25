@@ -1,6 +1,6 @@
 FROM node:16-alpine As development
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 4040
 
-CMD [ "npm", "run", "dev" ]
+CMD ["npm", "run", "dev"]

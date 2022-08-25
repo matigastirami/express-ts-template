@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import { cleanEnv, str, port, host, num } from 'envalid';
+import logger from './logger';
 
-const getEnvFileExtension = () => {
+export const getEnvFileExtension = () => {
   switch (process.env.NODE_ENV) {
     case 'development':
       return ''
@@ -10,9 +11,12 @@ const getEnvFileExtension = () => {
   }
 }
 
+const envFile = `.env${getEnvFileExtension()}`;
+
+logger.info(`Env file path: ${envFile}`);
+
 dotenv.config({
-  path: `.env${getEnvFileExtension()}`,
-  debug: ['development'].includes(process.env.NODE_ENV ?? 'development')
+  path: envFile,
 });
 
 class Env {

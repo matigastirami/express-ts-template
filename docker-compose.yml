@@ -3,9 +3,9 @@ services:
   api:
     build:
       context: .
-      target: development
+      dockerfile: Dockerfile
     volumes:
-      - .:/usr/src/app
+      - .:/app
     command: npm run dev
     ports:
       - "4040:4040"
@@ -80,7 +80,7 @@ networks:
     driver: bridge
 
 volumes:
-    postgres:
-    pgadmin:
-    cache:
-      driver: local
+  postgres:
+  pgadmin:
+  cache:
+    driver: local

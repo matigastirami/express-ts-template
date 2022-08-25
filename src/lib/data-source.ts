@@ -4,8 +4,6 @@ import Env from './env';
 
 const { DB: {type, host, port, username, password, database}, NODE_ENV } = Env;
 
-console.log("DB CONF", Env.DB);
-
 const nonTestDataSourceConf = NODE_ENV !== 'test' ? {
     host,
     port,
@@ -17,7 +15,7 @@ const AppDataSource = new DataSource({
     type,
     database,
     synchronize: NODE_ENV !== 'production',
-    logging: true,
+    logging: false,
     entities: [User],
     ...nonTestDataSourceConf
 })
