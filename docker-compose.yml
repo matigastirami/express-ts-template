@@ -74,6 +74,8 @@ services:
     networks:
       - backend
     restart: unless-stopped
+    depends_on:
+     - postgres
 
 networks:
   backend:
