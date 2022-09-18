@@ -3,7 +3,7 @@ import winston from "winston";
 const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
   format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
+  // defaultMeta: { service: 'user-service' },
 });
 
 // TODO: add some logging service for prod
